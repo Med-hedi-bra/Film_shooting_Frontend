@@ -1,0 +1,8 @@
+.borderGrid{
+    border: 1px solid #1D5D9B;
+    border-radius: 20px;
+    border-width: 2px;
+    box-shadow: 8px 10px #1D5D9B;
+    padding: 20px;
+
+}
