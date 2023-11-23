@@ -51,8 +51,19 @@ function DemandDetails() {
     setErrorMsg(false);
   };
   const handleDelete = async () => {
-    let res = await Services.deleteDemand(params.idDemand);
-    setSuccesMsg(true);
+    // let res = await Services.deleteDemand(params.idDemand);
+    // setSuccesMsg(true);
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette demande ?");
+
+    if (confirmDelete) {
+      try {
+        let res = await Services.deleteDemand(params.idDemand);
+        setSuccesMsg(true);
+      } catch (error) {
+        setErrorMsg(true);
+        console.error("Error deleting demand:", error);
+      }
+    }
   };
 
   const handleUpdate = () => {

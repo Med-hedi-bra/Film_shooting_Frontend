@@ -38,6 +38,7 @@ function Dashbored() {
 
           .then((res) => {
             res.json().then((res1) => {
+              // setDemands(res1);
               setDemands(res1?.reverse());
               setIsLoading(false);
             });
@@ -53,8 +54,10 @@ function Dashbored() {
   const handleNewDemand = () => {
     navigate("/add");
   };
-
+  {console.log(demands)}
   return (
+    
+    
     <div>
       {isLoading ? (
         <p>Loading...</p>

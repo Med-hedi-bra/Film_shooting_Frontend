@@ -337,48 +337,58 @@ export default function Multi() {
       nationaliteEtrangere: nationaliteEtrangere,
       prenomEtrangere: prenomEtrangere,
       nomEtrangere: nomEtrangere,
+
       prestationArmee: prestationArmee,
       nbrArmee: nbrArmee,
       dateArmeeFinish: dateArmeeFinish,
       dateArmeeStart: dateArmeeStart,
       lieuxArmee: lieuxArmee,
       selectedArmee: selectedArmee,
+
       prestationProtection: prestationProtection,
       nbrProtection: nbrProtection,
       dateProtectionFinish: dateProtectionFinish,
       dateProtectionStart: dateProtectionStart,
       lieuxProtection: lieuxProtection,
       selectedProtection: selectedProtection,
+
       prestationPolice: prestationPolice,
       nbrPolice: nbrPolice,
       datePoliceFinish: datePoliceFinish,
       datePoliceStart: datePoliceStart,
       lieuxPolice: lieuxPolice,
       selectedPolice: selectedPolice,
+
       dateBatimentFinish: dateBatimentFinish,
       dateBatimentStart: dateBatimentStart,
       lieuxBatiment: lieuxBatiment,
       selectedBatiment: selectedBatiment,
+
       dateHistoriqueFinish: dateHistoriqueFinish,
       dateHistoriqueStart: dateHistoriqueStart,
       lieuxHistorique: lieuxHistorique,
       selectedHistorique: selectedHistorique,
+
       dateAerienFinish: dateAerienFinish,
       dateAerienStart: dateAerienStart,
       selectedAerien: selectedAerien,
       lieuxAerien: lieuxAerien,
+
       dateMaritimeFinish: dateMaritimeFinish,
       dateMaritimeStart: dateMaritimeStart,
       selectedMaritime: selectedMaritime,
       lieuxMaritime: lieuxMaritime,
+
       dateRoutierFinish: dateRoutierFinish,
       dateRoutierStart: dateRoutierStart,
       selectedRoutier: selectedRoutier,
       lieuxRoutier: lieuxRoutier,
+      
       dateMaritimeTFinish: dateMaritimeTFinish,
       dateMaritimeTStart: dateMaritimeTStart,
       lieuxMaritimeT: lieuxMaritimeT,
       selectedMaritimeT: selectedMaritimeT,
+
       budget: budget,
       autrePrestation: autrePrestation,
       selectedTournageType: selectedTournageType,
@@ -395,11 +405,12 @@ export default function Multi() {
       listeTechFile: listeTechFile,
       calendrierFile: calendrierFile,
     };
+
+    // Preparing the request body
     const formData = new FormData();
     for (const key in form) {
       if (form[`${key}`] !== "" && key!=="contratTravailFile") formData.append(key, form[`${key}`]);
     }
-    formData.append("idUser", auth.user.idUser);
     const files = Array.from(form.contratTravailFile)
    files.forEach(file=>{
     formData.append(`contratTravailFile`, file);

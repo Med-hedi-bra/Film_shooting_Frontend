@@ -74,8 +74,11 @@ class Services {
     });
   }
   static addPreDemand(demandBody) {
-    let token = JSON.parse(localStorage.getItem("user")).token;
-    return fetch(this.url + `/preDemand`, {
+    let localStorageUser = JSON.parse(localStorage.getItem("user"));
+    let token = localStorageUser.token;
+    let idUser = localStorageUser.idUser;
+    console.log(idUser)
+    return fetch(this.url + `/preDemand/${idUser}`, {
       method: "POST",
       body: demandBody,
       headers: {

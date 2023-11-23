@@ -5,7 +5,7 @@ const RequireAuth = ({ children })=>{
     const location = useLocation()
     const userFromLocalStorage = JSON.parse(localStorage.getItem("user"))
     return (
-        auth?.user || userFromLocalStorage.token ? children:<Navigate to={"/login"} state={{from:location}} replace/>
+        auth?.user || userFromLocalStorage?.token ? children:<Navigate to={"/login"} state={{from:location}} replace/>
     )
 }
 export default RequireAuth

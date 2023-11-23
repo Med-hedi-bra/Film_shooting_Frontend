@@ -36,14 +36,11 @@ function App() {
           <Route path="/add" element={<RequireAuth><Multi></Multi></RequireAuth>}></Route>
           <Route path="/update" element={<RequireAuth><MultiUpdate></MultiUpdate></RequireAuth>}></Route> */}
 
-<Route path="/add" element={<Multi></Multi>}></Route>
+          <Route path="/add" element={<Multi></Multi>}></Route>
           <Route path="/dashbored" element={<Dashbored/>}></Route>
           <Route path="/profile" element={<Profile/>}></Route>
-          <Route
-            path="/demand/:idDemand"
-            element={<DemandDetails></DemandDetails>}
+          <Route path="/demand/:idDemand" element={<DemandDetails></DemandDetails>}
           ></Route>
-          {/* <Route path="/add" element={<RequireAuth><Multi></Multi></RequireAuth>}></Route> */}
           <Route path="/update" element={<MultiUpdate></MultiUpdate>}></Route>
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
