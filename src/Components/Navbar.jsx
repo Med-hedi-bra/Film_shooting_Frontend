@@ -31,7 +31,6 @@ function Navbar() {
   useEffect(() => {
     if (auth.user?.idUser) {
       if (auth.user?.role === "100") {
-        console.log("user");
         setAdmin(false);
       } else if (auth.user?.role === "101") {
         console.log("admin");

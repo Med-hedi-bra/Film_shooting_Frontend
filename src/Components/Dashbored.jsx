@@ -54,7 +54,6 @@ function Dashbored() {
   const handleNewDemand = () => {
     navigate("/add");
   };
-  {console.log(demands)}
   return (
     
     
