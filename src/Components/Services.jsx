@@ -77,7 +77,7 @@ class Services {
     let localStorageUser = JSON.parse(localStorage.getItem("user"));
     let token = localStorageUser.token;
     let idUser = localStorageUser.idUser;
-    console.log(idUser)
+    console.log(idUser);
     return fetch(this.url + `/preDemand/${idUser}`, {
       method: "POST",
       body: demandBody,
@@ -95,6 +95,45 @@ class Services {
         Authorization: `Bearer ${token}`,
       },
     });
+  }
+
+  static getOrCreateUserAndChat(email) {
+    const data = {
+      usernames: [email, "admin@admin.com"],
+      is_direct_chat: true,
+    };
+    const data1 = { username: email, email: email, secret: email };
+    const headers1 = {
+      "Private-Key": process.env.REACT_APP_CHAT_PROJECT_KEY,
+    };
+    const headers = {
+      "Project-ID": process.env.REACT_APP_CHAT_PROJECT_ID,
+      "User-Name": email,
+      "User-Secret": email,
+    };
+    
+
+    fetch("https://api.chatengine.io/users/", {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers1,
+      },
+      body: JSON.stringify(data1),
+    });
+
+    fetch("https://api.chatengine.io/chats/", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+        ...headers1,
+      },
+      body: JSON.stringify(data),
+    });
+
+    // .then(r =>  true)
+    // .catch(e => console.log('Get or create chat error', e))
   }
 }
 

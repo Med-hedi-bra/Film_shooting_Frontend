@@ -17,6 +17,8 @@ import DemandDetails from "./Components/DemandDetails";
 import MultiUpdate from "./Components/MultiUpdate";
 import { useEffect, useState } from "react";
 import RequireAuth from "./Components/RequireAuth"
+import ChatAdmin from "./Components/chat/admin/ChatAdmin";
+import ChatUser from "./Components/chat/user/ChatUser";
 function App() {
   return (
     <AuthProvider>
@@ -42,6 +44,10 @@ function App() {
           <Route path="/demand/:idDemand" element={<DemandDetails></DemandDetails>}
           ></Route>
           <Route path="/update" element={<MultiUpdate></MultiUpdate>}></Route>
+          <Route path="/support" element={<ChatUser></ChatUser>}></Route>
+          <Route path="/admin" element={<ChatAdmin></ChatAdmin>}></Route>
+ 
+
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>

@@ -10,8 +10,8 @@ import Typography from '@mui/material/Typography';
 function Profile() {
   const auth = useAuth()
   return (
-  <>
-  <h2 style={{textAlign:"center"}}>Profile</h2>
+    <div>
+      <h2 style={{textAlign:"center" , }}>Profile</h2>
    <Card sx={{ minWidth: 275 , marginLeft:"20px" , marginRight:"20px" , marginTop:"40px" }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -41,8 +41,7 @@ function Profile() {
         <Button size="small">Modifier Profile</Button>
       </CardActions> */}
     </Card>
- 
-  </>
+    </div>
   )
 }
 

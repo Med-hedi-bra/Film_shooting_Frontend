@@ -18,14 +18,27 @@ import avatar from "../assets/profile.png";
 import CNCI from "../assets/cnci.png";
 import { useAuth } from "./Auth";
 import { useNavigate } from "react-router-dom";
-
-
+import { useEffect } from "react";
+import Services from "./Services";
 
 function Navbar() {
   const auth = useAuth();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [isAdmin, setAdmin] = React.useState(null);
+
+  useEffect(() => {
+    if (auth.user?.idUser) {
+      if (auth.user?.role === "100") {
+        console.log("user");
+        setAdmin(false);
+      } else if (auth.user?.role === "101") {
+        console.log("admin");
+        setAdmin(true);
+      }
+    }
+  }, [auth.user]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -46,17 +59,27 @@ function Navbar() {
   const goToDashbored = () => {
     navigate("/dashbored");
     handleCloseNavMenu();
-    handleCloseUserMenu()
+    handleCloseUserMenu();
   };
   const goToProfile = () => {
     navigate("/profile");
-    handleCloseNavMenu(); 
-    handleCloseUserMenu()
+    handleCloseNavMenu();
+    handleCloseUserMenu();
   };
   const goLogout = () => {
     auth.logout();
-    navigate("/login")
+    navigate("/login");
   };
+  const goToSupport=() => {
+    navigate("/support");
+    handleCloseNavMenu();
+    handleCloseUserMenu();
+  }
+  const goToMessage=() => {
+    navigate("/admin");
+    handleCloseNavMenu();
+    handleCloseUserMenu();
+  }
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#1D5D9B" }}>
@@ -117,6 +140,19 @@ function Navbar() {
                   <MenuItem onClick={goToProfile}>
                     <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
+
+                  {isAdmin ? (
+                    <MenuItem onClick={goToMessage}>
+                      <Typography textAlign="center">Message</Typography>
+                    </MenuItem>
+                  ) : (
+                    <MenuItem onClick={goToSupport}>
+                      <Typography textAlign="center">Support</Typography>
+                    </MenuItem> 
+                  )}
+                  
+                 
+
                   <MenuItem onClick={goLogout}>
                     <Typography textAlign="center">Logout</Typography>
                   </MenuItem>
@@ -164,6 +200,21 @@ function Navbar() {
                 >
                   Profile
                 </Button>
+                { isAdmin ? (
+                  <Button
+                  onClick={goToMessage}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Messages
+                </Button>
+                ):(<Button
+                  onClick={goToSupport}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Support
+                </Button>)
+
+                }
                 <Button
                   onClick={goLogout}
                   sx={{ my: 2, color: "white", display: "block" }}
@@ -204,6 +255,15 @@ function Navbar() {
                   <MenuItem onClick={goToProfile}>
                     <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
+                  {isAdmin ? (
+                    <MenuItem onClick={goToMessage}>
+                    <Typography textAlign="center">Messages</Typography>
+                  </MenuItem>
+                  ):(
+                    <MenuItem onClick={goToSupport}>
+                    <Typography textAlign="center">Support</Typography>
+                  </MenuItem>
+                  )}
                   <MenuItem onClick={goLogout}>
                     <Typography textAlign="center">Logout</Typography>
                   </MenuItem>

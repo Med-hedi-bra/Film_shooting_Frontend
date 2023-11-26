@@ -59,6 +59,7 @@ function Dashbored() {
     
     
     <div>
+      <div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -150,6 +151,7 @@ function Dashbored() {
         </>
       )}
     </div>
+    </div> 
   );
 }
 

@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./Auth";
 import { useState } from "react";
 import { Alert } from "@mui/material";
+import Services from "./Services";
+
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -34,6 +36,9 @@ export default function Signup() {
       if (dataJson.token) {
         auth.setUser(dataJson);
         localStorage.setItem("user", JSON.stringify(dataJson));
+        // to create a user in the chat engine api
+        Services.getOrCreateUserandChat(dataJson.email)
+
         navigate("/dashbored");
       }
     } catch (error) {

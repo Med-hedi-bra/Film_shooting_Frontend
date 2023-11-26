@@ -11,6 +11,7 @@ import { Alert } from "@mui/material";
 import { useState } from "react";
 import { useAuth } from "./Auth";
 import { useNavigate } from "react-router-dom";
+import Services from "./Services";
 
 export default function Login() {
   const auth = useAuth();
@@ -32,6 +33,8 @@ export default function Login() {
       if (dataJson.token) {
         auth.setUser(dataJson);
         localStorage.setItem("user", JSON.stringify(dataJson));
+        // to create a user in the chat engine api
+        Services.getOrCreateUserAndChat(dataJson.email)
         navigate("/dashbored")
       }
       else if(dataJson.error){
@@ -43,18 +46,6 @@ export default function Login() {
     setErrorMsg("Erreur au niveau de serveur")
    }
 
- 
-      // .then(() => {
-      //   console.log(auth.user?.token)
-      //   if (auth.user?.token) {
-      //     navigate("/dashbored");
-      //   } else {
-      //     setErrorMsg("Email ou mot de passe incorrect");
-      //   }
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
   };
   return (
     <Container component="main" maxWidth="sm">
