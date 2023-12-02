@@ -37,12 +37,11 @@ export default function Signup() {
         auth.setUser(dataJson);
         localStorage.setItem("user", JSON.stringify(dataJson));
         // to create a user in the chat engine api
-        Services.getOrCreateUserandChat(dataJson.email)
-
+        Services.getOrCreateUserAndChat(dataJson.email)
         navigate("/dashbored");
       }
     } catch (error) {
-      setErrorMsg("Erreur au niveau de serveur");
+            setErrorMsg("Erreur au niveau de serveur");
     }
   };
 

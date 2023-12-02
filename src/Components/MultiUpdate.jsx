@@ -575,7 +575,7 @@ export default function MultiUpdate() {
   /*************** */
   return (
     <Card>
-      <p>{demand.idDemand}</p>
+      <h3>Mise à jour de la demande numéro : {demand.idDemand}</h3>
       <CardContent>
         <FormikStepper
           initialValues={{ TournageType: "" }}
@@ -665,7 +665,7 @@ export default function MultiUpdate() {
                       }}
                     ></TextField>
                     {selectedScenarioFile && (
-                      <p>Fichier sélectionné: {selectedScenarioFile}</p>
+                      <p>Ancien Document: {selectedScenarioFile}</p>
                     )}
                   </Box>
                 </Grid>
@@ -685,7 +685,7 @@ export default function MultiUpdate() {
                     ></TextField>
                     {selectedDecoupageTechniqueFile && (
                       <p>
-                        Fichier sélectionné: {selectedDecoupageTechniqueFile}
+                        Ancien Document: {selectedDecoupageTechniqueFile}
                       </p>
                     )}
                   </Box>
@@ -706,7 +706,7 @@ export default function MultiUpdate() {
                       
                     ></TextField>
                     {selectedSynopsisFile && (
-                      <p>Fichier sélectionné: {selectedSynopsisFile}</p>
+                      <p>Ancien Document: {selectedSynopsisFile}</p>
                     )}
                   </Box>
                 </Grid>
@@ -727,7 +727,7 @@ export default function MultiUpdate() {
                       }}
                       onChange={handleContratTravailFile}
                     ></TextField>
-                    <p>Fichier sélectionné:</p> 
+                    <p>Ancien Document:</p> 
                       {selectedContratTravailFile.map((element,index)=>(
                          <p>{index}/ {element}<br></br></p>
                       ))}
@@ -747,7 +747,7 @@ export default function MultiUpdate() {
                     ></TextField>
                     {selectedContratCoproductionFile && (
                       <p>
-                        Fichier sélectionné: {selectedContratCoproductionFile}
+                        Ancien Document: {selectedContratCoproductionFile}
                       </p>
                     )}
                   </Box>
@@ -765,7 +765,7 @@ export default function MultiUpdate() {
                     ></TextField>
                     {selectedDroitDauteurFile && (
                       <p>
-                        Fichier sélectionné: {selectedContratCoproductionFile}
+                        Ancien Document: {selectedContratCoproductionFile}
                       </p>
                     )}
                   </Box>
@@ -784,7 +784,7 @@ export default function MultiUpdate() {
                       onChange={handleAssuranceFile}
                     ></TextField>
                     {selectedAssuranceFile && (
-                      <p>Fichier sélectionné: {selectedAssuranceFile}</p>
+                      <p>Ancien Document: {selectedAssuranceFile}</p>
                     )}
                   </Box>
                 </Grid>
@@ -800,7 +800,7 @@ export default function MultiUpdate() {
                       onChange={handleBudgetPrevFile}
                     ></TextField>
                     {selectedBudgetPreFile && (
-                      <p>Fichier sélectionné: {selectedBudgetPreFile}</p>
+                      <p>Ancien Document: {selectedBudgetPreFile}</p>
                     )}
                   </Box>
                 </Grid>
@@ -819,7 +819,7 @@ export default function MultiUpdate() {
                       onChange={handleListeTechniqueFile}
                     ></TextField>
                     {selectedListeTechFile && (
-                      <p>Fichier sélectionné: {selectedListeTechFile}</p>
+                      <p>Ancien Document: {selectedListeTechFile}</p>
                     )}
                   </Box>
                 </Grid>
@@ -837,7 +837,7 @@ export default function MultiUpdate() {
                       onChange={handleCalendrierFile}
                     ></TextField>
                     {selectedCalendrierFile && (
-                      <p>Fichier sélectionné: {selectedCalendrierFile}</p>
+                      <p>Ancien Document: {selectedCalendrierFile}</p>
                     )}
                   </Box>
                 </Grid>

@@ -135,6 +135,39 @@ class Services {
     // .then(r =>  true)
     // .catch(e => console.log('Get or create chat error', e))
   }
-}
+
+  
+  static acceptDemand(id) {
+    let token = JSON.parse(localStorage.getItem("user")).token;
+
+    return fetch(this.url + `/demand/accept/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  static rejectDemand(id) { 
+    let token = JSON.parse(localStorage.getItem("user")).token;
+
+    return fetch(this.url + `/demand/reject/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  static getUserById(id) {
+    let token = JSON.parse(localStorage.getItem("user")).token;
+
+    return fetch(this.url + `/auth/user/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  }
 
 export default Services;

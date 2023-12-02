@@ -8,7 +8,6 @@ function ChatUser() {
   let password = auth.user?.email
   return (
     <div style={{height:"500", width:"800"}}>
-        this a user
       <ChatEngine
         projectID={process.env.REACT_APP_CHAT_PROJECT_ID}
         userName={username}

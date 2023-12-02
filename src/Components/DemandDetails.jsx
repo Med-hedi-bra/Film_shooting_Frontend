@@ -22,21 +22,36 @@ function DemandDetails() {
   const [demand, setDemand] = useState();
   const [succesMsg, setSuccesMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [acceptMsg, setacceptMsg] = useState(false);
+  const [rejectMsg, setrejectMsg] = useState(false);
   const auth = useAuth();
   const navigate = useNavigate();
   // get method to get the demand data
+
+  const [isAdmin, setAdmin] = useState(null);
+  const [userDetails, setuserDetails] = useState(null);
 
   useEffect(() => {
     //retrive data
     let localStorageUser = localStorage.getItem("user");
     if (localStorageUser) {
       auth.setUser(JSON.parse(localStorageUser));
+      if (JSON.parse(localStorageUser).role === "101") {
+        setAdmin(true);
+      } else {
+        setAdmin(false);
+      }
     }
 
     Services.getDemandById(params.idDemand)
       .then((res) => {
         res.json().then((res1) => {
           setDemand(res1[0]);
+          Services.getUserById(res1[0].idUser).then((res) => {
+            res.json().then((res1) => {
+              setuserDetails(res1);
+            });
+          });
         });
       })
       .catch((err) => {
@@ -53,7 +68,9 @@ function DemandDetails() {
   const handleDelete = async () => {
     // let res = await Services.deleteDemand(params.idDemand);
     // setSuccesMsg(true);
-    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette demande ?");
+    const confirmDelete = window.confirm(
+      "Êtes-vous sûr de vouloir supprimer cette demande ?"
+    );
 
     if (confirmDelete) {
       try {
@@ -69,13 +86,57 @@ function DemandDetails() {
   const handleUpdate = () => {
     navigate("/update", { state: { demand: demand } });
   };
-  console.log(demand);
+  const handleAccept = async () => {
+    let res = await Services.acceptDemand(params.idDemand);
+    setacceptMsg(true);
+  };
+  const handleReject = async () => {
+    let res = await Services.rejectDemand(params.idDemand);
+    setrejectMsg(true);
+  };
+  const StatePlaque = ({ state }) => {
+    let plaqueColor, plaqueText;
+
+    switch (state) {
+      case "Pending":
+        plaqueColor = "grey";
+        plaqueText = "Pending";
+        break;
+      case "Rejected":
+        plaqueColor = "red";
+        plaqueText = "Rejected";
+        break;
+      case "Accepted":
+        plaqueColor = "green";
+        plaqueText = "Accepted";
+        break;
+      default:
+        plaqueColor = "gray";
+        plaqueText = "Unknown";
+    }
+
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          backgroundColor: plaqueColor,
+          color: "white",
+          padding: "5px",
+          borderRadius: "5px",
+        }}
+      >
+        {plaqueText}
+      </div>
+    );
+  };
 
   return (
     <>
       {
         <Dialog
-          open={errorMsg || succesMsg}
+          open={errorMsg || succesMsg || acceptMsg || rejectMsg}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -83,6 +144,8 @@ function DemandDetails() {
           <DialogTitle id="alert-dialog-title">
             {errorMsg && "Erreur lors de suppresion de votre demande !!"}
             {succesMsg && "Suppresion de votre demande avec succces !!"}
+            {acceptMsg && "Demande acceptée avec succces !!"}
+            {rejectMsg && "Demande rejetée avec succces !!"}
           </DialogTitle>
 
           <DialogActions>
@@ -119,6 +182,7 @@ function DemandDetails() {
                   marginTop: "20px",
                 }}
               >
+                <StatePlaque state={demand.state} />
                 <CardContent style={{ marginLeft: "20px" }}>
                   <Typography
                     sx={{ fontSize: 14 }}
@@ -219,6 +283,7 @@ function DemandDetails() {
                     </Typography>
                   )}
                   <br />
+                  <Divider></Divider>
                   <Typography variant="h5" component="div">
                     Occupation du domaine public:
                   </Typography>
@@ -463,8 +528,53 @@ function DemandDetails() {
                       {demand?.autrePrestation}
                     </Typography>
                   </Box>
+                  <Divider></Divider>
+                  <br></br>
+                  <Box>
+                    <Typography variant="h5" component="div">
+                      Informations sur le demandeur:
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Email: {userDetails?.email}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Nom: {userDetails?.nom}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Fonction: {userDetails?.fonction}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Société: {userDetails?.societe}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Téléphone: {userDetails?.tel}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Fax: {userDetails?.fax}
+                    </Typography>
+                  </Box>
                 </CardContent>
                 <CardActions>
+                  {isAdmin && (
+                    <>
+                      <Button
+                        color="success"
+                        variant="contained"
+                        onClick={handleAccept}
+                        style={{ marginLeft: "5px" }}
+                      >
+                        Accepter
+                      </Button>
+                      <Button
+                        color="warning"
+                        variant="contained"
+                        onClick={handleReject}
+                        style={{ marginLeft: "5px" }}
+                      >
+                        Rejeter
+                      </Button>
+                    </>
+                  )}
                   <Button
                     size="medium"
                     variant="contained"
