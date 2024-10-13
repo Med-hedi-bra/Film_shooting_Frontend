@@ -20,6 +20,23 @@ git clone https://github.com/Med-hedi-bra/Film_shooting_Frontend.git
 cd Film_shooting_Frontend
 ```
 
+# 2. Setup environement
+You need to create a `.env` file based on the `.env.dist` file using the following command:
+
+```bash
+cp .env.dist .env
+```
+After that, you can customize your environment by modifying the values in the .env file to suit your specific situation.
+
+```
+REACT_APP_BACKEND_URL = "http://localhost:8080"
+REACT_APP_CHAT_PROJECT_KEY=changeit
+REACT_APP_CHAT_PROJECT_ID=changeit
+REACT_APP_ADMIN_USERNAME=admin@admin.com
+REACT_APP_ADMIN_SECRET=admin
+```
+###### Note: If you want to change the application's port, make sure to also update it in the docker-compose.yml file; otherwise, you may encounter issues related to port misconfiguration. 
+
 # 2. Build and Run the React App
 To run the project, you first need to build the Docker image and then start it. If you make any changes or improvements to the code, you will need to rebuild the image
 
