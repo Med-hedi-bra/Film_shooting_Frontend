@@ -37,8 +37,8 @@ After that, you can customize your environment by modifying the values in the .e
 REACT_APP_BACKEND_URL = "http://localhost:8080"
 REACT_APP_CHAT_PROJECT_KEY=changeit
 REACT_APP_CHAT_PROJECT_ID=changeit
-REACT_APP_ADMIN_USERNAME=admin@admin.com
-REACT_APP_ADMIN_SECRET=admin
+REACT_APP_CHAT_ADMIN_USERNAME=admin@admin.com
+REACT_APP_CHAT_ADMIN_SECRET=admin
 ```
 ###### Note: If you want to change the application's port, make sure to also update it in the docker-compose.yml file; otherwise, you may encounter issues related to port misconfiguration. 
 
