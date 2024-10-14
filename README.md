@@ -1,7 +1,12 @@
-# Filme Shooting Frontend
+# Film Shooting Frontend
 This project serves as the frontend for a system that assists administrators in managing a high volume of actor applications for film production.
 
 
+## Related Repositories
+
+- [Backend Repository](https://github.com/Med-hedi-bra/Film_shooting_Backend.git) - The backend part of the project can be found here.
+
+# Frontend Repository
 This documentation demonstrates how to run a React application using Docker and Docker Compose. The provided `docker-compose.yml` file helps you build and run the React app container.
 
 ## Prerequisites
